@@ -1,0 +1,277 @@
+Problem 1: import java.util.List; - Move this file to a named package (java)
+Razlog:
+    • SonarLint (pravilo S1220) preporučuje da sve Java klase budu smeštene u imenovane pakete, a ne u podrazumevani (default) paket. Korišćenje podrazumevanog paketa nije 
+    • preporučljivo jer može dovesti do problema sa organizacijom koda i može otežati održavanje i ponovno korišćenje koda.
+Rešenje:
+    1. Kreiraj paket:
+        ◦ Na početku svog Java fajla Calculator.java, dodaj liniju koja definiše paket, na primer:
+       java
+package com.example.calculator;
+  	2.Prebaci fajl:
+        ◦ Premesti Calculator.java u odgovarajući direktorijum koji odgovara nazivu paketa. Na primer, ako koristiš paket com.example.calculator, fajl bi trebao biti smešten u src/com/example/calculator/.
+       3.Ažuriraj import direktive:
+        ◦ Nakon što premestiš fajl u paket, proveri da li su svi importi ispravni i ažuriraj ih po potrebi.
+Evo kako bi izgledao početak tvog fajla nakon što ga premestiš u imenovani paket:
+package com.example.calculator;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Calculator {
+    // ostatak koda
+}
+Nakon što ovo uradiš, problem bi trebao biti rešen, i SonarLint više neće prijavljivati ovu grešku. Ako imaš još problema iz SonarLint-a koje želiš da rešimo, slobodno ih podeli!
+
+Čini se da drugi problem koji prijavljuje SonarLint u vezi s fajlom Calculator.java ima dve komponente:
+Problem 2:
+    1. Import izjava: import java.util.list;
+        ◦ SonarLint ovde sugeriše da postoji problem sa import direktivom.
+    2. Calculator.java is a non-project file, only syntax errors are reported (Java 16)
+        ◦ Ova poruka znači da SonarLint prepoznaje Calculator.java kao fajl koji nije deo projekta, pa izveštava samo sintaksičke greške.
+1. Problem sa import java.util.list;
+    • Problem:
+        ◦ Import direktiva import java.util.list; je sintaktički netačna. Klasa List se piše velikim početnim slovom: java.util.List.
+    • Rešenje:
+        ◦ Ispravi import direktivu da glasi:
+Čini se da drugi problem koji prijavljuje SonarLint u vezi s fajlom Calculator.java ima dve komponente:
+Problem 2:
+    1. Import izjava: import java.util.list;
+        ◦ SonarLint ovde sugeriše da postoji problem sa import direktivom.
+    2. Calculator.java is a non-project file, only syntax errors are reported (Java 16)
+        ◦ Ova poruka znači da SonarLint prepoznaje Calculator.java kao fajl koji nije deo projekta, pa izveštava samo sintaksičke greške.
+1. Problem sa import java.util.list;
+    • Problem:
+        ◦ Import direktiva import java.util.list; je sintaktički netačna. Klasa List se piše velikim početnim slovom: java.util.List.
+    • Rešenje:
+        ◦ Ispravi import direktivu da glasi:
+Čini se da drugi problem koji prijavljuje SonarLint u vezi s fajlom Calculator.java ima dve komponente:
+Problem 2:
+    1. Import izjava: import java.util.list;
+        ◦ SonarLint ovde sugeriše da postoji problem sa import direktivom.
+    2. Calculator.java is a non-project file, only syntax errors are reported (Java 16)
+        ◦ Ova poruka znači da SonarLint prepoznaje Calculator.java kao fajl koji nije deo projekta, pa izveštava samo sintaksičke greške.
+1. Problem sa import java.util.list;
+    • Problem:
+        ◦ Import direktiva import java.util.list; je sintaktički netačna. Klasa List se piše velikim početnim slovom: java.util.List.
+    • Rešenje:
+        ◦ Ispravi import direktivu da glasi:
+import java.util.List;
+2. "Non-project file" poruka
+    • Problem:
+        ◦ SonarLint prijavljuje da je fajl Calculator.java izvan projektne strukture, pa se analiziraju samo osnovne sintaksičke greške.
+    • Mogući uzroci:
+        ◦ Fajl Calculator.java možda nije pravilno dodan u projekat ili nije u okviru foldera koji je prepoznat kao deo projekta.
+    • Rešenje:
+        ◦ 1.Provjeri strukturu projekta:
+            ▪ Uveri se da je Calculator.java smešten unutar src direktorijuma ili drugog odgovarajućeg direktorijuma u okviru projekta.
+        ◦ 2.Dodaj fajl u projekat:
+            ▪ U IDE-u, možeš dodati Calculator.java u projektni okvir kako bi SonarLint mogao pravilno analizirati fajl.
+Zaključak:
+    • Ispravi import direktivu u Calculator.java da glasi import java.util.List;.
+    • Proveri strukturu projekta kako bi osigurao da je fajl prepoznat kao deo projekta, čime će SonarLint moći da obavlja punu analizu.
+Ako ti ovo reši problem, možemo preći na sledeći problem iz SonarLint-a.
+-----------
+Treći problem koji prijavljuje SonarLint u fajlu Calculator.java odnosi se na pravilo S1118, koje predlaže dodavanje privatnog konstruktora kako bi se sakrio implicitni javni konstruktor.
+Problem 3: public class Calculator { - Add a private constructor to hide the implicit public one (java
+)
+Razlog:
+    • SonarLint pravilo S1118:
+        ◦ Kada klasa sadrži samo statičke metode i polja, kao što je to slučaj sa klasom Calculator, ne bi trebalo da ima implicitni javni konstruktor. To je zato što nema smisla instancirati objekat ove klase. Dodavanje privatnog konstruktora sprečava instanciranje klase i jasno ukazuje na to da klasa služi samo kao statički kontejner.
+Rešenje:
+    • Dodavanje privatnog konstruktora:
+        ◦ Možeš dodati privatni konstruktor unutar klase Calculator, čime ćeš sprečiti instanciranje objekta te klase.
+Evo kako možeš da izmeniš klasu:
+public class Calculator {
+
+    // Privatni konstruktor kako bi se sprečilo instanciranje
+    private Calculator() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+    }
+
+    static float finalResult;
+
+    static class Operations {
+        // sadržaj klase Operations...
+    }
+
+    public static String Run(String expression) {
+        return evaluateExpression(expression);
+    }
+
+    private static String evaluateExpression(String expression) {
+        // sadržaj metode evaluateExpression...
+    }
+
+    private static void Calculate(List<Float> numbers, List<String> operations) {
+        // sadržaj metode Calculate...
+    }
+}
+Objašnjenje:
+    • Privatni konstruktor:
+        ◦ Konstruktor je obeležen kao private, što znači da se ova klasa ne može instancirati izvan same klase.
+        ◦ Izbacivanje izuzetka: Dodavanje linije throw new UnsupportedOperationException(...) jasno daje do znanja da klasa nije namenjena za instanciranje. Ova praksa je korisna za situacije kada neko pokuša da refleksijom stvori instancu klase.
+Nakon što ovo dodaš, SonarLint više neće prijavljivati ovu grešku.
+--------------
+Četvrti problem koji prijavljuje SonarLint u fajlu Calculator.java odnosi se na metodu ToString, koja može izazvati zabunu ili konflikt sa metodom toString iz superklase java.lang.Object.
+Problem 4: public static String ToString() { - Rename method "ToString" to prevent any misunderstanding/clash with method "toString" defined in superclass "java.lang.Object" (java
+)
+Razlog:
+    • SonarLint pravilo S1845:
+        ◦ Metoda ToString u tvojoj klasi može lako biti pomešana sa metodom toString, koja je nasleđena iz superklase java.lang.Object. Ova metoda je široko korišćena u Javi i služi za vraćanje tekstualnog prikaza objekta.
+        ◦ Razlika u velikom početnom slovu može biti suptilna i dovesti do grešaka ili nesporazuma.
+Rešenje:
+    • Preimenuj metodu ToString kako bi izbegao konflikt i potencijalne nesporazume.
+    • Možeš koristiti drugo ime koje bolje opisuje funkcionalnost metode.
+Na primer, možeš promeniti naziv metode u getOperationSymbols ili nešto slično što jasno opisuje šta metoda radi:
+public static String getOperationSymbols() {
+    return "" + ADDITION_SYMBOL + MULTIPLICATION_SYMBOL + DIVISION_SYMBOL + SUBTRACTION_SYMBOL;
+}
+Takođe, nemoj zaboraviti ažurirati sve pozive ove metode unutar koda:
+String[] numbers = expression.split("[" + Operations.getOperationSymbols() + "]");
+Objašnjenje:
+    • Izbegavanje konflikta: Preimenovanjem metode u nešto specifičnije, izbegavaš konflikt sa metodom toString iz java.lang.Object, što čini kod jasnijim i smanjuje mogućnost grešaka.
+Nakon ove izmene, SonarLint više neće prijavljivati ovu grešku.
+
+------------------
+Peti problem koji SonarLint prijavljuje u fajlu Calculator.java odnosi se na naziv metode ToString, koji ne prati konvencije imenovanja u Javi.
+Problem 5: public static String ToString() { - Rename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$' (java
+)
+Razlog:
+    • SonarLint pravilo S100:
+        ◦ U Javi, metode bi trebalo da prate određene konvencije imenovanja. Prema konvenciji, ime metode treba da počinje malim slovom i može da sadrži slova i brojeve, ali bez specijalnih znakova.
+        ◦ Trenutni naziv ToString ne prati ovu konvenciju jer počinje velikim slovom, što može dovesti do zabune.
+Rešenje:
+    • Preimenuj metodu tako da njeno ime počinje malim slovom i prati standardnu konvenciju za imenovanje metoda u Javi.
+Na primer, možeš promeniti naziv metode iz ToString u toStringRepresentation ili getOperationSymbols (kao što je predloženo u prethodnom odgovoru):
+public static String getOperationSymbols() {
+    return "" + ADDITION_SYMBOL + MULTIPLICATION_SYMBOL + DIVISION_SYMBOL + SUBTRACTION_SYMBOL;
+}
+
+Ako si već preimenovao metodu u prethodnom koraku, na primer u getOperationSymbols, tada ćeš automatski rešiti i ovaj problem.
+Objašnjenje:
+    • Pridržavanje konvencija: Korišćenjem konvencija za imenovanje metoda (camelCase), činiš svoj kod čitljivijim i lakšim za održavanje. Takođe, izbegavaš potencijalne nesporazume ili greške koje bi mogle nastati zbog nepoštovanja ovih pravila.
+Nakon preimenovanja metode, SonarLint više neće prijavljivati ovu grešku.
+Ako želiš, možemo nastaviti sa analizom preostalih problema u fajlu Calculator.java.
+------------------
+It looks like SonarLint is suggesting that the method name Run in your Calculator.java file doesn't conform to standard Java naming conventions. Specifically, it should start with a lowercase letter and follow camelCase notation.
+Here's how you can update the method name:
+    1. Rename the method: Change Run to runExpression or something similar that describes what the method does.
+    2. Update the method call: Make sure to update all places where this method is called to use the new name.
+So, your updated method signature might look like this:
+public static String runExpression(String expression) {
+    // Method implementation
+}
+If you have any more details or need help with other issues, let me know!
+----------
+SonarLint is suggesting that the temporary variable textResult is unnecessary because it is only used once and can be removed to make the code cleaner. Instead of assigning the value to textResult, you can directly return the result.
+СонарЛинт сугерише да је привремена променљива тектРесулт непотребна јер се користи само једном и може се уклонити да би код био чистији. Уместо да доделите вредност тектРесулт-у, можете директно да вратите резултат.
+Here’s how you can refactor the code:
+Original code:
+String textResult = Float.toString(finalResult);
+return textResult;
+Refaktored code
+return Float.toString(finalResult);
+Ова промена чини код сажетијим и лакшим за читање. Ако има још проблема или вам је потребна додатна помоћ, слободно питајте!
+--------------
+Osmu grešku koju SonarLint prijavljuje u fajlu Calculator.java odnosi se na naziv metode Calculate, koja ne prati konvencije imenovanja u Javi.
+Problem 8: private static void Calculate(List<Float> numbers, List<String> operations) - Rename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$' (java
+)
+Razlog:
+    • SonarLint pravilo S100:
+        ◦ Metode u Javi bi trebalo da budu imenovane prema konvencijama koje podrazumevaju da ime metode počinje malim slovom (camelCase). Ovo pomaže da se razlikuju metode od klasa i interfejsa, koji počinju velikim slovom.
+Rešenje:
+    • Preimenuj metodu tako da ime počinje malim slovom, čime ćeš se pridržavati standarda za imenovanje metoda u Javi.
+Na primer, možeš promeniti naziv metode Calculate u calculate:
+private static void calculate(List<Float> numbers, List<String> operations) {
+    // sadržaj metode
+}
+Nemoj zaboraviti da ažuriraš sve pozive ove metode unutar koda:
+calculate(numbers, operations);
+Objašnjenje:
+    • Pridržavanje konvencija: Korišćenjem pravilnog imenovanja metoda (calculate umesto Calculate), poboljšavaš čitljivost koda i olakšavaš njegovo održavanje.
+Nakon preimenovanja metode, SonarLint više neće prijavljivati ovu grešku.
+Ako želiš, možemo nastaviti sa rešavanjem preostalih problema koje je SonarLint identifikovao.
+Deveti problem koji SonarLint prijavljuje u fajlu Calculator.java odnosi se na upotrebu return izjave.
+Problem 9: return; - (SonarLint pravilo java
+)
+Razlog:
+    • SonarLint pravilo S3626:
+        ◦ Ovo pravilo sugeriše da je return; izjava suvišna ili nepotrebna ako se koristi na kraju void metode ili bloka koda, posebno kada nema drugih operacija koje treba izvršiti nakon nje.
+        ◦ return; se može koristiti da eksplicitno završi izvršavanje metode, ali ako se koristi na kraju metode koja je već na kraju, SonarLint smatra da je to nepotrebno.
+Rešenje:
+    • Pregledaj mesto gde se koristi return;:
+        ◦ Ako se return; nalazi na kraju void metode i nema drugih operacija koje slede, možeš ga ukloniti jer je implicitno i nije potrebno.
+Na primer, ako tvoja metoda izgleda ovako:
+private static void someMethod() {
+    // neka logika...
+    return;  // Ova linija je suvišna ako je na kraju metode
+}
+Možeš jednostavno ukloniti return;:
+private static void someMethod() {
+    // neka logika...
+    // return;  // Ukloni ovu liniju
+}
+Objašnjenje:
+    • Poboljšanje čistoće koda: Uklanjanjem suvišne return; izjave, tvoj kod postaje jednostavniji i jasniji, bez nepotrebnih linija koje ne doprinose funkcionalnosti.
+Ako si uklonio ovu suvišnu return; izjavu, SonarLint više neće prijavljivati ovu grešku.
+­_______________________________________________________________________________
+Jedinični test
+Da bismo napisali jedinični test za metodu calculate u klasi Calculator, treba prvo da osiguramo da je metoda dostupna za testiranje. Metoda calculate je trenutno privatna, pa je jedan od pristupa da je prebacimo u protected ili public vidljivost. Alternativno, možemo koristiti refleksiju za testiranje privatne metode, ali to nije uobičajena praksa za jedinične testove. U ovom primeru ćemo pretpostaviti da je metoda calculate postavljena kao public.
+Koristićemo JUnit 5 za pisanje jediničnih testova.
+Primer jediničnog testa za metodu calculate
+Pretpostavimo da metoda calculate vrši osnovne aritmetičke operacije nad listom brojeva na osnovu datih operatora (+, -, *, /). Testiraćemo jednostavan slučaj sabiranja.
+    1. Dodaj JUnit 5 u svoj projekat:
+        ◦ Ako koristiš Maven, u pom.xml dodaj sledeću zavisnost:
+<dependencies>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>5.8.2</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.8.2</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+Napiši jedinični test:
+import org.junit.jupiter.api.Test;
+import java.util.Arrays;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class CalculatorTest {
+
+    @Test
+    public void testCalculateAddition() {
+        // Inicijalizacija liste brojeva
+        List<Float> numbers = Arrays.asList(2.0f, 3.0f, 5.0f);
+        // Inicijalizacija liste operatora
+        List<String> operations = Arrays.asList("+", "+");
+
+        // Očekivani rezultat
+        float expectedResult = 10.0f;
+
+        // Poziv metode calculate
+        Calculator.calculate(numbers, operations);
+
+        // Provera rezultata
+        assertEquals(expectedResult, Calculator.finalResult);
+    }
+}
+Objašnjenje:
+    1. Inicijalizacija podataka:
+        ◦ Kreiramo listu numbers sa vrednostima 2.0, 3.0 i 5.0.
+        ◦ Kreiramo listu operations sa operatorima + između svakog para brojeva.
+    2. Očekivani rezultat:
+        ◦ Sabiranje svih brojeva (2.0 + 3.0 + 5.0) daje 10.0.
+    3. Poziv metode calculate:
+        ◦ Metoda calculate je pozvana sa listama numbers i operations.
+    4. Provera rezultata:
+        ◦ Upoređujemo očekivani rezultat sa vrednošću Calculator.finalResult, koji bi trebalo da bude izračunat u metodi calculate.
+    5. Napomena:
+        ◦ Ako metoda calculate koristi finalResult da sačuva rezultat, u testu koristimo assertEquals kako bismo proverili da li je rezultat ispravan.
+Napomena:
+    • U stvarnom projektu, uvek je preporučljivo da metoda calculate vrati rezultat umesto da ga direktno postavlja u statičku promenljivu. To bi olakšalo testiranje i poboljšalo čitljivost koda.
